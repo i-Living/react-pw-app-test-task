@@ -1,0 +1,28 @@
+{
+  "name": "react-pw-app-test-task",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "match-sorter": "^2.2.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-modal": "^3.3.1",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "react-table": "^6.7.6",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0",
+    "superagent": "^3.8.2"
+  },
+  "devDependencies": {
+    "webpack": "^3.11.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
