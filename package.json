@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "jwt-decode": "^2.2.0",
     "match-sorter": "^2.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -13,8 +15,7 @@
     "react-table": "^6.7.6",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
-    "redux-thunk": "^2.2.0",
-    "superagent": "^3.8.2"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "webpack": "^3.11.0"

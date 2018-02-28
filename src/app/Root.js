@@ -6,19 +6,16 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import App from './App'
 import Transaction from './containers/transaction'
 import TransactionsList from './containers/transactions-list'
-import SignIn from './containers/sign-in'
-import SignUp from './containers/sign-up'
+import LoginForm from './containers/login-form'
 
-const Root = ({ store}) => (
+const Root = ({ store }) => (
   <Provider store={store}>
     <BrowserRouter>
       <div className='Root'>
-      <Route path="/" component={App} />
-        {/* <Route path="/" component={Header} logged={true} /> */}
+        <Route path="/" component={App} />
         <Switch>
-          {/* <Route exact path="/" component={App} /> */}
-          <Route path="/sign-in" component={SignIn} />
-          <Route path="/sign-up" component={SignUp} />
+          <Route path="/sign-in" component={LoginForm} />
+          <Route path="/sign-up" component={LoginForm} />
           <Route path="/transaction" component={Transaction} />
           <Route path="/transactions-list" component={TransactionsList} />
         </Switch>
