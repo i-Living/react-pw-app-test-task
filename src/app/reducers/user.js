@@ -2,6 +2,7 @@ import {
   USER_LOGGIN_SUCCESS,
   USER_LOGGED_OUT_SUCCESS,
   USER_SIGNUP_SUCCESS,
+  USER_SIGNUP_FAILURE,
   FETCH_USER_SUCCESS,
   CREATE_TRANSACTION_SUCCESS,
   CREATE_TRANSACTION_FAILURE
@@ -13,6 +14,11 @@ export default function user(state = {}, {type, payload}) {
       return payload
     case USER_SIGNUP_SUCCESS:
       return payload
+    case USER_SIGNUP_FAILURE:
+      return {
+        ...state,
+        ...payload
+      }
     case USER_LOGGED_OUT_SUCCESS:
       return {}
     case FETCH_USER_SUCCESS:

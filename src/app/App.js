@@ -16,7 +16,8 @@ import './styles/App.css'
 class App extends React.Component {
 
   componentDidMount() {
-    this.props.getUser()
+    if (this.props.isAuthenticated)
+      this.props.getUser()
   }
 
   render() {

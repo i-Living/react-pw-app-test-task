@@ -11,7 +11,8 @@ export default {
     signup: user =>
       axios.post(url + "/users", { ...user })
         .then(res => res.data)
-        .catch(err => console.error(err)),
+        .catch(err => err),
+        // .catch(err => console.error(err)),
     get: () =>
       axios.get(url + "/api/protected/user-info")
         .then(res => res.data)

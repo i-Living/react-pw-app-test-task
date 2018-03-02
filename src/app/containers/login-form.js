@@ -19,7 +19,9 @@ class LoginForm extends Component {
       signUpData: {
         username: '',
         password: '',
-        email: ''
+        password2: '',
+        email: '',
+        wrongPass: false
       },
       location: this.props.location
     }
@@ -34,6 +36,10 @@ class LoginForm extends Component {
       })
     : this.setState({
         signUpData: { ...this.state.signUpData, [e.target.name]: e.target.value }
+      }, function () {
+        this.state.signUpData.password !== this.state.signUpData.password2
+        ? this.setState({signUpData: { ...this.state.signUpData, wrongPass: true }})
+        : this.setState({signUpData: { ...this.state.signUpData, wrongPass: false }})
       })
   }
 
@@ -61,7 +67,7 @@ class LoginForm extends Component {
                 <Link to='/sign-in'>Sign in </Link>
                 / Sign up
               </h3>
-              <SignUp payload={this.state.signUpData} onSubmit={this.onSubmit} onChange={this.onChange} />
+              <SignUp payload={this.state.signUpData} loginError={this.props.loginError} onSubmit={this.onSubmit} onChange={this.onChange} />
             </div>
           )
         }
@@ -76,7 +82,8 @@ LoginForm.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    loginError: state.user.loginError ? state.user.loginError : ''
   }
 }
 
