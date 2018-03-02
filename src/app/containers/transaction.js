@@ -132,7 +132,12 @@ class Transaction extends React.Component {
             ? <div className="text-center text-danger"> Not enough cash</div>
             : <br></br>
           }
-          <button className="btn btn-lg btn-primary btn-block" type="submit" disabled={this.state.lowCash}> Send </button>
+          <button
+            className="btn btn-lg btn-primary btn-block"
+            type="submit"
+            disabled={this.state.lowCash || this.state.recipient === ''}>
+            Send
+          </button>
         </form>
         <ReactModal
           isOpen={this.state.showModal}
