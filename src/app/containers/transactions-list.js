@@ -1,52 +1,31 @@
-import React, { Component } from 'react'
+import React from 'react'
 import matchSorter from 'match-sorter'
+import { connect } from 'react-redux'
+import { getTransactions} from '../actions/transaction'
 
 // Import React Table
 import ReactTable from "react-table"
 import "react-table/react-table.css"
 
-const data = [{
-  date: '21.01.2018',
-  recipient: 'Tom',
-  amount: '5',
-  balance: '1575'
-},{
-  date: '17.01.2018',
-  recipient: 'Alex',
-  amount: '20',
-  balance: '1580'
-},{
-  date: '15.01.2018',
-  recipient: 'Tom',
-  amount: '200',
-  balance: '1600'
-},{
-  date: '08.01.2018',
-  recipient: 'Bob',
-  amount: '150',
-  balance: '1800'
-}]
+class TransactionsList extends React.Component {
 
-
-class TransactionsList extends Component {
-  constructor () {
-    super();
-    this.state = {
-    };
+  componentDidMount() {
+    this.props.getTransactions()
   }
 
-  onRowClick(data) {
-    this.props.onRowClick(data)
+  onRowClick(transaction) {
+    this.props.onRowClick(transaction)
   }
 
   render() {
+    const { transactions } = this.props
     const columns = [{
       Header: 'Date/Time',
       accessor: 'date',
       filterAll: true
     }, {
-      Header: 'Recipient',
-      accessor: 'recipient',
+      Header: 'Username',
+      accessor: 'username',
       filterAll: true
     }, {
       Header: 'Amount',
@@ -62,7 +41,7 @@ class TransactionsList extends Component {
     return (
       <ReactTable
         className="container"
-        data={data}
+        data={transactions}
         columns={columns}
         defaultPageSize={10}
         filterable
@@ -81,4 +60,14 @@ class TransactionsList extends Component {
   }
 }
 
-export default TransactionsList
+function mapStateToProps(state) {
+  return {
+    transactions: state.transaction.trans_token
+  }
+}
+
+const mapDispatchToProps = {
+  getTransactions
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList)

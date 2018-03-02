@@ -1,12 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import decode from "jwt-decode"
+import { getUserFromToken } from './app/actions/user'
 import reducer from './app/reducers'
-import Root from './app/Root'
-import setAuthorizationHeader from "./app/utils/setAuthorizationHeader"
+import App from './app/App'
+import setAuthorizationHeader from './app/utils/setAuthorizationHeader'
 
 import './app/styles/index.css'
 import './app/styles/bootstrap.min.css'
@@ -15,12 +17,7 @@ import './app/styles/bootstrap.min.css'
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 if (localStorage.parrotwingsJWT) {
-  const payload = decode(localStorage.parrotwingsJWT)
-  const user = {
-    token: localStorage.parrotwingsJWT,
-    email: payload.email,
-    confirmed: payload.confirmed
-  }
+  let user = getUserFromToken(localStorage.parrotwingsJWT)
   setAuthorizationHeader(localStorage.parrotwingsJWT)
   store.dispatch({
       type: "USER_LOGGIN_SUCCESS",
@@ -28,4 +25,11 @@ if (localStorage.parrotwingsJWT) {
   })
 }
 
-ReactDOM.render(<Root store={store} />, document.getElementById('root'))
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <Route component={App} />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById("root")
+);

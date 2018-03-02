@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-class Header extends Component {
+class Header extends React.Component {
+
   render() {
-    const { user, location, logged } = this.props
+    const { user, location, isAuthenticated } = this.props
     return (
       <div className="text-center">
         <header className="App-header">
-          {!logged
+          {!isAuthenticated
             ? (
               <div className="">
                 <h4>PW Application</h4>
@@ -25,7 +26,7 @@ class Header extends Component {
             : (
               <div className="d-flex justify-content-between">
                 <div className="user">
-                  {user.name && <h5>{user.name}: {user.balance}</h5>}
+                  {user.username && <h5>{user.username}: {user.balance}</h5>}
                 </div>
                 <div>
                   <Link className="px-2" to='/transaction'> Transaction </Link>
@@ -43,10 +44,10 @@ class Header extends Component {
 
 Header.propTypes = {
   location: PropTypes.object.isRequired,
-  logged: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    balance: PropTypes.string.isRequired,
+    username: PropTypes.string,
+    balance: PropTypes.number,
   })
 }
 

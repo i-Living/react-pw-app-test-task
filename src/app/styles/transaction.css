@@ -16,10 +16,20 @@
 .styled-btn {
   border-color: #ced4da !important;
 }
+
 .styled-btn:hover {
   background-color: #e4e4e4 !important;
 }
 
 .input-group-append {
   z-index: 0 !important;
+}
+
+.custom-list-group {
+  position: absolute;
+  width: 300px;
+}
+
+.custom-list-group .list-group-item {
+  padding: .50rem 1rem;
 }

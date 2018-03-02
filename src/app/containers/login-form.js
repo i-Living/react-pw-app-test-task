@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { login } from '../actions/user'
+import { login, signup } from '../actions/user'
 import SignIn from '../components/sign-in'
 import SignUp from '../components/sign-up'
 import '../styles/login-form.css'
@@ -41,7 +41,7 @@ class LoginForm extends Component {
     e.preventDefault()
     this.props.location.pathname === "/sign-in"
     ? this.props.login(this.state.signInData).then(this.props.history.push("/transaction"))
-    : this.props.signin(this.state.signUpData).then(this.props.history.push("/transaction"))
+    : this.props.signup(this.state.signUpData).then(this.props.history.push("/transaction"))
   }
 
   render() {
@@ -81,7 +81,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  login
+  login,
+  signup
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm))

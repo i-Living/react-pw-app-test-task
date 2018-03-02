@@ -33,3 +33,8 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+
+/* transactions-list table */
+.rt-tr-group:hover {
+  background-color: #f9f9f9;
+}
