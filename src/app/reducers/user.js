@@ -1,17 +1,25 @@
 import {
   USER_LOGGIN_SUCCESS,
+  USER_LOGGIN_FAILURE,
   USER_LOGGED_OUT_SUCCESS,
   USER_SIGNUP_SUCCESS,
   USER_SIGNUP_FAILURE,
   FETCH_USER_SUCCESS,
   CREATE_TRANSACTION_SUCCESS,
-  CREATE_TRANSACTION_FAILURE
+  CREATE_TRANSACTION_FAILURE,
+  GO_TO_SIGNIN_FORM,
+  GO_TO_SIGNUP_FORM
 } from '../actionTypes'
 
 export default function user(state = {}, {type, payload}) {
   switch (type) {
     case USER_LOGGIN_SUCCESS:
       return payload
+    case USER_LOGGIN_FAILURE:
+      return {
+        ...state,
+        ...payload
+      }
     case USER_SIGNUP_SUCCESS:
       return payload
     case USER_SIGNUP_FAILURE:
@@ -31,6 +39,10 @@ export default function user(state = {}, {type, payload}) {
     case CREATE_TRANSACTION_FAILURE:
       console.error(payload)
       return state
+    case GO_TO_SIGNIN_FORM:
+      return {}
+    case GO_TO_SIGNUP_FORM:
+      return {}
     default:
       return state
   }

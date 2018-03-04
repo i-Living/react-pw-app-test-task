@@ -18,7 +18,8 @@ class Logout extends React.Component {
         <div className="logout text-center container">
           {isAuthenticated ? (
             <div>
-              <h3>Logout ?</h3>
+              <h3>Are you sure u want to loguot?</h3>
+              <br></br>
               <button className="btn btn-lg btn-primary" onClick={this.onLogout.bind(this)}>Logout</button>
             </div>
           ) : (

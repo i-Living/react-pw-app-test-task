@@ -79,13 +79,24 @@ export const login = data => async dispatch => {
   dispatch({ type: USER_LOGGIN_START })
   try {
     const userToken = await api.user.login(data)
-    localStorage.parrotwingsJWT = userToken.id_token
-    setAuthorizationHeader(localStorage.parrotwingsJWT)
-    const user = getUserFromToken(userToken.id_token)
-    dispatch({
-      type: USER_LOGGIN_SUCCESS,
-      payload: user
-    })
+    if (!userToken.id_token) {
+      const payload = {
+        loginError: userToken.response.data
+      }
+      dispatch({
+        type: USER_LOGGIN_FAILURE,
+        payload: payload,
+        error: true
+      })
+    } else {
+      localStorage.parrotwingsJWT = userToken.id_token
+      setAuthorizationHeader(localStorage.parrotwingsJWT)
+      const user = getUserFromToken(userToken.id_token)
+      dispatch({
+        type: USER_LOGGIN_SUCCESS,
+        payload: user
+      })
+    }
   } catch (err) {
     dispatch({
       type: USER_LOGGIN_FAILURE,

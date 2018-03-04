@@ -6,10 +6,10 @@ import '../styles/login-form.css'
 class SignUp extends Component {
 
   render() {
-    const { email, username, password, password2, wrongPass } = this.props.payload
+    const { email, username, password, password2 } = this.props.payload
     return (
-      <form className="form-signin" onSubmit={this.props.onSubmit}>
-        <label htmlFor="inputEmail" className="sr-only">Email address</label>
+      <form className="form-signin text-left" onSubmit={this.props.onSubmit}>
+        <label htmlFor="inputEmail" className="form-label">Email address</label>
         <input
           type="email"
           name="email"
@@ -19,8 +19,11 @@ class SignUp extends Component {
           value={email}
           onChange={this.props.onChange}
           autoFocus
+          required
         />
-        <label htmlFor="inputLogin" className="sr-only">Login</label>
+        {this.props.loginError && <div className="form-input-error"> {this.props.loginError} </div>}
+        {this.props.emptyFields.email && <div className="form-input-error"> Email is required </div>}
+        <label htmlFor="inputLogin" className="form-label mt-2">Login</label>
         <input
           type="text"
           name="username"
@@ -30,7 +33,8 @@ class SignUp extends Component {
           value={username}
           onChange={this.props.onChange}
         />
-        <label htmlFor="inputPassword" className="sr-only">Password</label>
+        {this.props.emptyFields.username && <div className="form-input-error"> Login is required </div>}
+        <label htmlFor="inputPassword" className="form-label mt-2">Password</label>
         <input
           type="password"
           name="password"
@@ -40,7 +44,9 @@ class SignUp extends Component {
           value={password}
           onChange={this.props.onChange}
         />
-        <label htmlFor="inputPassword" className="sr-only">Verify password</label>
+        {this.props.payload.wrongPass && <div className="form-input-error"> Passwords are different </div>}
+        {this.props.emptyFields.password && <div className="form-input-error"> Passwords is required </div>}
+        <label htmlFor="inputPassword2" className="form-label mt-2">Password confirm</label>
         <input
           type="password"
           name="password2"
@@ -50,14 +56,8 @@ class SignUp extends Component {
           value={password2}
           onChange={this.props.onChange}
         />
-        {this.props.loginError
-          ? <div className="text-center text-danger"> User with this email already exist </div>
-          : <div></div>
-        }
-        {wrongPass
-          ? <div className="text-center text-danger"> Passwords are different </div>
-          : <div></div>
-        }
+        {this.props.payload.wrongPass && <div className="form-input-error">Passwords are different </div>}
+        {this.props.emptyFields.password2 && <div className="form-input-error"> Password confirm is required </div>}
         <button className="btn btn-lg btn-primary btn-block" type="submit"> Sign up </button>
       </form>
     )
@@ -71,6 +71,12 @@ SignUp.propTypes = {
     password: PropTypes.string.isRequired,
     password2: PropTypes.string.isRequired,
     wrongPass: PropTypes.bool.isRequired,
+  }).isRequired,
+  emptyFields: PropTypes.shape({
+    email: PropTypes.bool.isRequired,
+    username: PropTypes.bool.isRequired,
+    password: PropTypes.bool.isRequired,
+    password2: PropTypes.bool.isRequired,
   }).isRequired,
   loginError: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
