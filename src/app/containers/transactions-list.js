@@ -9,10 +9,12 @@ import "react-table/react-table.css"
 
 class TransactionsList extends React.Component {
 
+  // Component needs to update transactions list data.
   componentDidMount() {
     this.props.getTransactions()
   }
 
+  // Send transaction data to transaction form.
   onRowClick(transaction) {
     this.props.onRowClick(transaction)
   }

@@ -2,9 +2,9 @@ import api from '../api'
 import setAuthorizationHeader from '../utils/setAuthorizationHeader'
 import decode from 'jwt-decode'
 import {
-  USER_LOGGIN_START,
-  USER_LOGGIN_SUCCESS,
-  USER_LOGGIN_FAILURE,
+  USER_LOGIN_START,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAILURE,
   USER_LOGGED_OUT_SUCCESS,
   USER_LOGGED_OUT_FAILURE,
   USER_SIGNUP_START,
@@ -16,8 +16,9 @@ import {
   FETCH_USERS_LIST_START,
   FETCH_USERS_LIST_SUCCESS,
   FETCH_USERS_LIST_FAILURE
-} from "../actionTypes"
+} from '../actionTypes'
 
+// Get user data from local storage.
 export const getUserFromToken = (token) => {
   let payload = {}
   try {
@@ -34,6 +35,7 @@ export const getUserFromToken = (token) => {
   return user
 }
 
+// Get user with api.
 export const getUser = () => async dispatch => {
   dispatch({ type: FETCH_USER_START })
   try {
@@ -58,6 +60,7 @@ export const getUser = () => async dispatch => {
   }
 }
 
+// Filter recipients with api.
 export const filterUsers = filter => async dispatch => {
   dispatch({ type: FETCH_USERS_LIST_START })
   try {
@@ -75,8 +78,9 @@ export const filterUsers = filter => async dispatch => {
   }
 }
 
+// Login with api. Save token to local storage. Update authorization bearer.
 export const login = data => async dispatch => {
-  dispatch({ type: USER_LOGGIN_START })
+  dispatch({ type: USER_LOGIN_START })
   try {
     const userToken = await api.user.login(data)
     if (!userToken.id_token) {
@@ -84,7 +88,7 @@ export const login = data => async dispatch => {
         loginError: userToken.response.data
       }
       dispatch({
-        type: USER_LOGGIN_FAILURE,
+        type: USER_LOGIN_FAILURE,
         payload: payload,
         error: true
       })
@@ -93,19 +97,20 @@ export const login = data => async dispatch => {
       setAuthorizationHeader(localStorage.parrotwingsJWT)
       const user = getUserFromToken(userToken.id_token)
       dispatch({
-        type: USER_LOGGIN_SUCCESS,
+        type: USER_LOGIN_SUCCESS,
         payload: user
       })
     }
   } catch (err) {
     dispatch({
-      type: USER_LOGGIN_FAILURE,
+      type: USER_LOGIN_FAILURE,
       payload: err,
       error: true
     })
   }
 }
 
+// Logout. Remove token from local storage. Clear authorization bearer.
 export const logout = () => dispatch => {
   try {
     localStorage.removeItem("parrotwingsJWT")
@@ -122,6 +127,7 @@ export const logout = () => dispatch => {
   }
 }
 
+// Registration new user with api. Save token to local storage. Update authorization bearer.
 export const signup = data => async dispatch => {
   dispatch({ type: USER_SIGNUP_START })
   try {

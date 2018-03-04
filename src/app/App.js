@@ -15,6 +15,9 @@ import './styles/App.css'
 
 class App extends React.Component {
 
+  /**
+   * App component needs to update user data if user is authenticated
+   */
   componentDidMount() {
     if (this.props.isAuthenticated)
       this.props.getUser()

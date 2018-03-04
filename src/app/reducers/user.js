@@ -1,6 +1,6 @@
 import {
-  USER_LOGGIN_SUCCESS,
-  USER_LOGGIN_FAILURE,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAILURE,
   USER_LOGGED_OUT_SUCCESS,
   USER_SIGNUP_SUCCESS,
   USER_SIGNUP_FAILURE,
@@ -13,9 +13,9 @@ import {
 
 export default function user(state = {}, {type, payload}) {
   switch (type) {
-    case USER_LOGGIN_SUCCESS:
+    case USER_LOGIN_SUCCESS:
       return payload
-    case USER_LOGGIN_FAILURE:
+    case USER_LOGIN_FAILURE:
       return {
         ...state,
         ...payload

@@ -39,6 +39,10 @@ class LoginForm extends Component {
     this.onGoToSignUp = this.onGoToSignUp.bind(this)
   }
 
+  /**
+   * Updates state data from input
+   * @param  {[event]} e Click event
+   */
   onChange(e) {
     this.props.location.pathname === "/sign-in"
     ? this.setState({
@@ -53,11 +57,18 @@ class LoginForm extends Component {
       })
   }
 
+  /**
+   * Starts submit action.
+   * @param  {[event]} e Form submit event
+   */
   onSubmit(e) {
     e.preventDefault()
-    this.cheackInput()
+    this.checkInput()
   }
 
+  /**
+   * If input is valid then submit data, if no response error then redirect to transaction.
+   */
   sendData() {
     const emptyFields = this.state.emptyFields
     const location = this.props.location.pathname
@@ -77,7 +88,10 @@ class LoginForm extends Component {
       }
   }
 
-  cheackInput() {
+  /**
+   * Checks if input is valid and calls sendData function.
+   */
+  checkInput() {
     const location = this.props.location.pathname
     let state = {}
     let emptyFields = this.state.emptyFields

@@ -9,18 +9,21 @@ import { getUserFromToken } from './app/actions/user'
 import reducer from './app/reducers'
 import App from './app/App'
 import setAuthorizationHeader from './app/utils/setAuthorizationHeader'
+import { USER_LOGIN_SUCCESS } from './app/actionTypes'
 
 import './app/styles/index.css'
 import './app/styles/bootstrap.min.css'
 
-
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
+// Setup user data if local storagehas token.
 if (localStorage.parrotwingsJWT) {
-  let user = getUserFromToken(localStorage.parrotwingsJWT)
+  console.log(localStorage)
+  const user = getUserFromToken(localStorage.parrotwingsJWT)
+  console.log(user)
   setAuthorizationHeader(localStorage.parrotwingsJWT)
   store.dispatch({
-      type: "USER_LOGGIN_SUCCESS",
+      type: USER_LOGIN_SUCCESS,
       payload: user
   })
 }

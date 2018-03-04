@@ -6,9 +6,9 @@ import {
   CREATE_TRANSACTION_START,
   CREATE_TRANSACTION_SUCCESS,
   CREATE_TRANSACTION_FAILURE
-} from "../actionTypes"
+} from '../actionTypes'
 
-
+// Get user transactions with api.
 export const getTransactions = () => async dispatch => {
   dispatch({ type: FETCH_USER_TRANSACTIONS_START })
   try {
@@ -26,6 +26,7 @@ export const getTransactions = () => async dispatch => {
   }
 }
 
+// Create new transaction with api.
 export const createTransaction = (recipient, amount) => async dispatch => {
   dispatch({ type: CREATE_TRANSACTION_START })
   try {

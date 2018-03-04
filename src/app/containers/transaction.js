@@ -34,34 +34,66 @@ class Transaction extends React.Component {
     this.onSelectRecipient = this.onSelectRecipient.bind(this)
   }
 
+  /**
+   * On open modal function.
+   * @return {[state]} New showModal state
+   */
   onOpenModal () {
     this.props.getTransactions()
     this.setState({ showModal: true })
   }
 
+  /**
+   * On close modal function.
+   * @return {[state]} New closeModal state
+   */
   onCloseModal () {
     this.setState({ showModal: false })
   }
 
+  /**
+   * On close notification  function.
+   * @return {[state]} New showNotification state
+   */
   onCloseNotification () {
     this.setState({ showNotification: false })
   }
 
+  /**
+   * Updates recipient state from input. Shows filtered users.
+   * @param  {[event]} event Input event
+   * @return {[state]} New recipient, showUsers state
+   */
   onRecipientChange (event) {
     this.setState({recipient: event.target.value, showUsers: true})
     if (event.target.value.length)
       this.props.filterUsers(event.target.value)
   }
 
+  /**
+   * Select user from list.
+   * @param  {[event]} event Click event
+   * @return {[state]} New recipient, showUsers state
+   */
   onSelectRecipient (event) {
     this.setState({recipient: event.target.text, showUsers: false})
   }
 
+  /**
+   * Clears filtered users after left click.
+   * @param  {[event]} e Blur event
+   * @return {[state]} New showUsers state
+   */
   onBlurEvent(e) {
     // TODO: Remove timeout. Add click checking.
     setTimeout(() => this.setState({showUsers: false}), 200)
   }
 
+  /**
+   * Updates amount state from input. Allows to send transaction if user balance > transaction amount.
+   * @param  {[event]} event Input event
+   * @return {[state]} New lowCash, amount state
+   */
   onAmountChange (event) {
     const amount = event.target.value
     if (event.target.validity.valid) {
@@ -73,16 +105,27 @@ class Transaction extends React.Component {
     }
   }
 
+  /**
+   * Get transaction data from user transaction list.
+   * @param  {[object]} data Previous transaction data
+   * @return {[state]} New recipient, amount state
+   */
   onHistoryGet (data) {
-    this.setState({recipient: data.username, amount: data.amount})
+    const amount = Math.abs(data.amount)
+    this.setState({recipient: data.username, amount: amount})
     this.onCloseModal()
   }
 
+  /**
+   * Create new transaction. Shows success modal window.
+   * @param  {[event]} e Form submit event
+   * @return {[state]} New showNotification state
+   */
   onSubmit(e) {
     e.preventDefault()
     this.props.createTransaction(this.state.recipient, this.state.amount)
     this.setState({showNotification: true})
-    setTimeout(() => this.setState({showNotification: false}), 5000)
+    setTimeout(() => this.setState({showNotification: false}), 3000)
   }
 
   render() {
