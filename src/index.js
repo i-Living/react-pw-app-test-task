@@ -18,9 +18,7 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 // Setup user data if local storagehas token.
 if (localStorage.parrotwingsJWT) {
-  console.log(localStorage)
   const user = getUserFromToken(localStorage.parrotwingsJWT)
-  console.log(user)
   setAuthorizationHeader(localStorage.parrotwingsJWT)
   store.dispatch({
       type: USER_LOGIN_SUCCESS,

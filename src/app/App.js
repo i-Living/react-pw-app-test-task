@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 
 import Header from './components/header'
@@ -44,10 +43,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
-
-App.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state) {
