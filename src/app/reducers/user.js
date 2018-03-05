@@ -1,47 +1,38 @@
-import {
-  USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILURE,
-  USER_LOGGED_OUT_SUCCESS,
-  USER_SIGNUP_SUCCESS,
-  USER_SIGNUP_FAILURE,
-  FETCH_USER_SUCCESS,
-  CREATE_TRANSACTION_SUCCESS,
-  CREATE_TRANSACTION_FAILURE,
-  GO_TO_SIGNIN_FORM,
-  GO_TO_SIGNUP_FORM
-} from '../actionTypes'
+import * as types from '../actionTypes'
 
 export default function user(state = {}, {type, payload}) {
   switch (type) {
-    case USER_LOGIN_SUCCESS:
+    case types.USER_LOGIN_SUCCESS:
       return payload
-    case USER_LOGIN_FAILURE:
+    case types.USER_LOGIN_FAILURE:
       return {
         ...state,
         ...payload
       }
-    case USER_SIGNUP_SUCCESS:
+    case types.USER_SIGNUP_SUCCESS:
       return payload
-    case USER_SIGNUP_FAILURE:
+    case types.USER_SIGNUP_FAILURE:
       return {
         ...state,
         ...payload
       }
-    case USER_LOGGED_OUT_SUCCESS:
+    case types.USER_LOGGED_OUT_SUCCESS:
       return {}
-    case FETCH_USER_SUCCESS:
+    case types.FETCH_USER_SUCCESS:
       return payload
-    case CREATE_TRANSACTION_SUCCESS:
+    case types.FETCH_USER_FAILURE:
+      return payload
+    case types.CREATE_TRANSACTION_SUCCESS:
       return {
         ...state,
         ...payload
       }
-    case CREATE_TRANSACTION_FAILURE:
+    case types.CREATE_TRANSACTION_FAILURE:
       console.error(payload)
       return state
-    case GO_TO_SIGNIN_FORM:
+    case types.GO_TO_SIGNIN_FORM:
       return {}
-    case GO_TO_SIGNUP_FORM:
+    case types.GO_TO_SIGNUP_FORM:
       return {}
     default:
       return state

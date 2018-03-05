@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ReactModal from 'react-modal'
-// import PropTypes from 'prop-types'
 import TransactionsList from './transactions-list'
 
 import '../styles/transaction.css'

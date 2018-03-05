@@ -8,18 +8,24 @@ import LoginForm from './containers/login-form'
 import Logout from './containers/logout'
 import Transaction from './containers/transaction'
 import TransactionsList from './containers/transactions-list'
-import { getUser } from './actions/user'
+import { getUser, logout } from './actions/user'
+
 
 import './styles/App.css'
 
 class App extends React.Component {
 
   /**
-   * App component needs to update user data if user is authenticated
+   * App component needs to update user data if user is authenticated.
+   * Logout user token if its token expired
    */
   componentDidMount() {
     if (this.props.isAuthenticated)
-      this.props.getUser()
+      this.props.getUser().then(() => {
+        if (this.props.getUserError) {
+          this.props.logout()
+        }
+      })
   }
 
   render() {
@@ -47,13 +53,15 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    getUserError: state.user.getUserError ? !!state.user.getUserError : false,
     isAuthenticated: state.user ? !!state.user.email : false,
-    user: state.user
+    user: state.user,
   }
 }
 
 const mapDispatchToProps = {
-  getUser
+  getUser,
+  logout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
