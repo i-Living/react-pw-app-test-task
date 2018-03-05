@@ -22,7 +22,7 @@ class SignUp extends Component {
           required
         />
         {this.props.loginError && <div className="form-input-error"> {this.props.loginError} </div>}
-        {this.props.emptyFields.email && <div className="form-input-error"> Email is required </div>}
+        {this.props.emptyFields.email && <div className="form-input-error">Email is required</div>}
         <label htmlFor="inputLogin" className="form-label mt-2">Login</label>
         <input
           type="text"
@@ -33,7 +33,7 @@ class SignUp extends Component {
           value={username}
           onChange={this.props.onChange}
         />
-        {this.props.emptyFields.username && <div className="form-input-error"> Login is required </div>}
+        {this.props.emptyFields.username && <div className="form-input-error">Login is required</div>}
         <label htmlFor="inputPassword" className="form-label mt-2">Password</label>
         <input
           type="password"
@@ -44,21 +44,21 @@ class SignUp extends Component {
           value={password}
           onChange={this.props.onChange}
         />
-        {this.props.payload.wrongPass && <div className="form-input-error"> Passwords are different </div>}
-        {this.props.emptyFields.password && <div className="form-input-error"> Passwords is required </div>}
-        <label htmlFor="inputPassword2" className="form-label mt-2">Password confirm</label>
+        {this.props.payload.wrongPass && <div className="form-input-error">Passwords are different</div>}
+        {this.props.emptyFields.password && <div className="form-input-error">Passwords is required</div>}
+        <label htmlFor="inputPassword2" className="form-label mt-2">Confirm password</label>
         <input
           type="password"
           name="password2"
           id="inputPassword2"
           className="form-control"
-          placeholder="Verify password"
+          placeholder="Confirm password"
           value={password2}
           onChange={this.props.onChange}
         />
-        {this.props.payload.wrongPass && <div className="form-input-error">Passwords are different </div>}
-        {this.props.emptyFields.password2 && <div className="form-input-error"> Password confirm is required </div>}
-        <button className="btn btn-lg btn-primary btn-block" type="submit"> Sign up </button>
+        {this.props.payload.wrongPass && <div className="form-input-error">Passwords are different</div>}
+        {this.props.emptyFields.password2 && <div className="form-input-error">Password confirm is required</div>}
+        <button className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
       </form>
     )
   }

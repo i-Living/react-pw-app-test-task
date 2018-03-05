@@ -19,7 +19,7 @@ class SignIn extends Component {
           onChange={this.props.onChange}
           autoFocus
         />
-        {this.props.emptyFields.email && <div className="form-input-error"> Email is required </div>}
+        {this.props.emptyFields.email && <div className="form-input-error">Email is required</div>}
         <label htmlFor="inputPassword" className="form-label">Password</label>
         <input
           type="password"
@@ -30,9 +30,9 @@ class SignIn extends Component {
           value={password}
           onChange={this.props.onChange}
         />
-        {this.props.emptyFields.password && <div className="form-input-error"> Passwords is required </div>}
-        {this.props.loginError && <div className="form-input-error"> {this.props.loginError} </div>}
-        <button className="btn btn-lg btn-primary btn-block" type="submit"> Sign in </button>
+        {this.props.emptyFields.password && <div className="form-input-error">Passwords is required</div>}
+        {this.props.loginError && <div className="form-input-error">{this.props.loginError}</div>}
+        <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
     )
   }

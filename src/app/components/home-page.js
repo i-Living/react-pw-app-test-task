@@ -1,6 +1,6 @@
 import React from "react"
-import { Link } from 'react-router-dom'
 import PropTypes from "prop-types"
+import { Link } from 'react-router-dom'
 
 class HomePage extends React.Component {
   render() {
@@ -9,9 +9,11 @@ class HomePage extends React.Component {
         <div className="home-page text-center container">
           <h3>Welcom to Parrot Wings application</h3>
           {isAuthenticated ? (
-            <Link to="/transaction">Go to new transaction</Link>
+            <div className="home-page-logged-in">
+              <Link to="/transaction">Go to new transaction</Link>
+            </div>
           ) : (
-            <div>
+            <div className="home-page-logged-out">
               <Link to="/sign-in">Sign In</Link> or <Link to="/sign-up">Sign Up</Link>
             </div>
           )}
