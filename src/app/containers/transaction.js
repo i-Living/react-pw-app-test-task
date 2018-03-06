@@ -12,7 +12,7 @@ ReactModal.setAppElement('#root')
 
 class Transaction extends React.Component {
   constructor () {
-    super();
+    super()
     this.state = {
       recipient: '',
       amount: '',
@@ -65,8 +65,9 @@ class Transaction extends React.Component {
    */
   onRecipientChange (event) {
     this.setState({recipient: event.target.value, showUsers: true})
-    if (event.target.value.length)
+    if (event.target.value.length) {
       this.props.filterUsers(event.target.value)
+    }
   }
 
   /**
@@ -83,7 +84,7 @@ class Transaction extends React.Component {
    * @param  {[event]} e Blur event
    * @return {[state]} New showUsers state
    */
-  onBlurEvent(e) {
+  onBlurEvent (e) {
     // TODO: Remove timeout. Add click checking.
     setTimeout(() => this.setState({showUsers: false}), 200)
   }
@@ -120,79 +121,79 @@ class Transaction extends React.Component {
    * @param  {[event]} e Form submit event
    * @return {[state]} New showNotification state
    */
-  onSubmit(e) {
+  onSubmit (e) {
     e.preventDefault()
     this.props.createTransaction(this.state.recipient, this.state.amount)
     this.setState({showNotification: true})
     setTimeout(() => this.setState({showNotification: false}), 3000)
   }
 
-  render() {
+  render () {
     return (
-      <div className="container">
-        <h4 className="text-center"> New transaction </h4>
-        <form className="form-transaction" onSubmit={this.onSubmit}>
-          <label htmlFor="inputRecipient" className="text-left">Recipient</label>
-          <div className="input-group">
+      <div className='container'>
+        <h4 className='text-center'> New transaction </h4>
+        <form className='form-transaction' onSubmit={this.onSubmit}>
+          <label htmlFor='inputRecipient' className='text-left'>Recipient</label>
+          <div className='input-group'>
             <input
-              type="text"
-              id="inputRecipient"
-              className="form-control"
-              placeholder="Recipient name"
-              autoComplete="off"
+              type='text'
+              id='inputRecipient'
+              className='form-control'
+              placeholder='Recipient name'
+              autoComplete='off'
               onChange={this.onRecipientChange}
               onBlur={this.onBlurEvent}
               value={this.state.recipient || ''}
             />
-            <div className="input-group-append">
-              <button className="styled-btn btn btn-outline-secondary" type="button" onClick={this.onOpenModal}>
-                <img src={searchIcon} className="search-icon" alt="search" />
+            <div className='input-group-append'>
+              <button className='styled-btn btn btn-outline-secondary' type='button' onClick={this.onOpenModal}>
+                <img src={searchIcon} className='search-icon' alt='search' />
               </button>
             </div>
           </div>
-          <div className="list-group custom-list-group">
+          <div className='list-group custom-list-group'>
             {(this.props.filteredUsers.length && this.state.showUsers && this.state.recipient.length > 0)
               ? this.props.filteredUsers.map(item => (
-                <a className="list-group-item list-group-item-action" key={item.id} onClick={this.onSelectRecipient}>
+                <a className='list-group-item list-group-item-action' key={item.id} onClick={this.onSelectRecipient}>
                   {item.name}
                 </a>
               ))
-              : <div></div>
+              : <div />
             }
           </div>
-          <label htmlFor="inputAmount" className="text-left">Amount</label>
+          <label htmlFor='inputAmount' className='text-left'>Amount</label>
           <input
-            type="text"
-            pattern="[0-9]*"
-            id="inputAmount"
-            className="form-control"
-            placeholder="Transaction amount"
+            type='text'
+            pattern='[0-9]*'
+            id='inputAmount'
+            className='form-control'
+            placeholder='Transaction amount'
             onChange={this.onAmountChange}
             value={this.state.amount || ''}
           />
           {this.state.lowCash
-            ? <div className="text-center text-danger"> Not enough cash</div>
-            : <br></br>
+            ? <div className='text-center text-danger'> Not enough cash</div>
+            : <br />
           }
           <button
-            className="btn btn-lg btn-primary btn-block"
-            type="submit"
+            className='btn btn-lg btn-primary btn-block'
+            type='submit'
             disabled={this.state.lowCash || this.state.recipient === ''}>
             Send
           </button>
         </form>
         <ReactModal
           isOpen={this.state.showModal}
-          contentLabel="Transactions List"
-          shouldCloseOnOverlayClick={true}
+          contentLabel='Transactions List'
+          shouldCloseOnOverlayClick
         >
-          <button className="btn btn-link text-dark float-right" onClick={this.onCloseModal}>Close</button>
-          <TransactionsList onRowClick={this.onHistoryGet} modal={true} transactions={this.props.transactions || []}/>
+          <button className='btn btn-link text-dark float-right' onClick={this.onCloseModal}>Close</button>
+          <TransactionsList onRowClick={this.onHistoryGet} modal transactions={this.props.transactions || []} />
         </ReactModal>
         <ReactModal
           isOpen={this.state.showNotification}
-          contentLabel="Minimal Modal Example"
-          shouldCloseOnOverlayClick={true}
+          contentLabel='Minimal Modal Example'
+          shouldCloseOnOverlayClick
           style={{
             content: {
               top: '50%',
@@ -204,14 +205,14 @@ class Transaction extends React.Component {
           }}
         >
           <h2>Successfull</h2>
-          <button className="btn btn-success btn-block" onClick={this.onCloseNotification}>OK</button>
+          <button className='btn btn-success btn-block' onClick={this.onCloseNotification}>OK</button>
         </ReactModal>
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     user: state.user,
     filteredUsers: state.userList,

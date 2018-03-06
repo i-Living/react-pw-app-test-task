@@ -17,12 +17,12 @@ import './app/styles/bootstrap.min.css'
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 // Setup user data if local storagehas token.
-if (localStorage.parrotwingsJWT) {
-  const user = getUserFromToken(localStorage.parrotwingsJWT)
-  setAuthorizationHeader(localStorage.parrotwingsJWT)
+if (window.localStorage.parrotwingsJWT) {
+  const user = getUserFromToken(window.localStorage.parrotwingsJWT)
+  setAuthorizationHeader(window.localStorage.parrotwingsJWT)
   store.dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: user
+    type: USER_LOGIN_SUCCESS,
+    payload: user
   })
 }
 
@@ -32,5 +32,5 @@ ReactDOM.render(
       <Route component={App} />
     </Provider>
   </BrowserRouter>,
-  document.getElementById("root")
-);
+  document.getElementById('root')
+)

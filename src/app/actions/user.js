@@ -28,7 +28,7 @@ export const getUser = () => async dispatch => {
     if (payload.user_info_token) {
       payload = payload.user_info_token
       const user = {
-        token: localStorage.parrotwingsJWT,
+        token: window.localStorage.parrotwingsJWT,
         email: payload.email,
         username: payload.name,
         balance: payload.balance
@@ -46,7 +46,6 @@ export const getUser = () => async dispatch => {
         payload: getUserError
       })
     }
-
   } catch (err) {
     dispatch({
       type: types.FETCH_USER_FAILURE,
@@ -89,8 +88,8 @@ export const login = data => async dispatch => {
         error: true
       })
     } else {
-      localStorage.parrotwingsJWT = userToken.id_token
-      setAuthorizationHeader(localStorage.parrotwingsJWT)
+      window.localStorage.parrotwingsJWT = userToken.id_token
+      setAuthorizationHeader(window.localStorage.parrotwingsJWT)
       const user = getUserFromToken(userToken.id_token)
       dispatch({
         type: types.USER_LOGIN_SUCCESS,
@@ -109,7 +108,7 @@ export const login = data => async dispatch => {
 // Logout. Remove token from local storage. Clear authorization bearer.
 export const logout = () => dispatch => {
   try {
-    localStorage.removeItem("parrotwingsJWT")
+    window.localStorage.removeItem('parrotwingsJWT')
     setAuthorizationHeader()
     dispatch({
       type: types.USER_LOGGED_OUT_SUCCESS
@@ -138,8 +137,8 @@ export const signup = data => async dispatch => {
         error: true
       })
     } else {
-      localStorage.parrotwingsJWT = userToken.id_token
-      setAuthorizationHeader(localStorage.parrotwingsJWT)
+      window.localStorage.parrotwingsJWT = userToken.id_token
+      setAuthorizationHeader(window.localStorage.parrotwingsJWT)
       const user = getUserFromToken(userToken.id_token)
       dispatch({
         type: types.USER_SIGNUP_SUCCESS,

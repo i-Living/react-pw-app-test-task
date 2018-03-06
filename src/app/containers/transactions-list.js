@@ -1,25 +1,24 @@
 import React from 'react'
 import matchSorter from 'match-sorter'
 import { connect } from 'react-redux'
-import { getTransactions} from '../actions/transaction'
+import { getTransactions } from '../actions/transaction'
 
 // Import React Table
-import ReactTable from "react-table"
-import "react-table/react-table.css"
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
 
 class TransactionsList extends React.Component {
-
   // Component needs to update transactions list data.
-  componentDidMount() {
+  componentDidMount () {
     this.props.getTransactions()
   }
 
   // Send transaction data to transaction form.
-  onRowClick(transaction) {
+  onRowClick (transaction) {
     this.props.onRowClick(transaction)
   }
 
-  render() {
+  render () {
     const { transactions } = this.props
     const columns = [{
       Header: 'Date/Time',
@@ -42,7 +41,7 @@ class TransactionsList extends React.Component {
     }]
     return (
       <ReactTable
-        className="container"
+        className='container'
         data={transactions}
         columns={columns}
         defaultPageSize={10}
@@ -51,18 +50,18 @@ class TransactionsList extends React.Component {
           matchSorter(row, filter.value, { keys: [filter.id] })
         }
         getTrProps={(state, rowInfo) => {
-            return {
-                onClick: (e) => {
-                  this.props.modal && this.onRowClick(rowInfo.original)
-                }
+          return {
+            onClick: (e) => {
+              this.props.modal && this.onRowClick(rowInfo.original)
             }
+          }
         }}
       />
-      )
+    )
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     transactions: state.transaction.trans_token
   }

@@ -1,6 +1,6 @@
 import * as types from '../actionTypes'
 
-export default function user(state = {}, {type, payload}) {
+export default function user (state = {}, {type, payload}) {
   switch (type) {
     case types.USER_LOGIN_SUCCESS:
       return payload
